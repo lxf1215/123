@@ -1,0 +1,183 @@
+函数优化
+1.优化代码，用函数的方式修改练习4 输出每一天的天气（函数）
+2.打印温度折线图，使用函数来优化（必须有返回值）
+
+import urllib.request as r
+data=r.urlopen('http://api.openweathermap.org/data/2.5/forecast?q=zhengzhou,cn&mode=json&lang=zh_cn&&APPID=6a67ed641c0fda8b69715c43518b6996&units=metric').read().decode('utf-8','ignore')
+
+import json
+data=json.loads(data)
+def weather(a,b):
+    print('day'+str(a))
+    print('温度'+str(data['list'][b]['main']['temp']))
+    print('')
+weather(1,2)
+weather(2,10)
+weather(3,18)
+weather(4,26)
+weather(5,34)
+    
+def chart(a):
+    num=str('-')*int(data['list'][a]['main']['temp'])
+    return num
+print('温度折线图：')
+print('1'+chart(2))
+print('2'+chart(10))
+print('3'+chart(18))
+print('4'+chart(26))
+print('5'+chart(34))
+
+def lsc(d):
+    return data['list'][d]['main']['temp']
+d1=lsc(2)
+d2=lsc(10)
+d3=lsc(18)
+d4=lsc(26)
+d5=lsc(34)
+m=[d1,d2,d3,d4,d5]
+m.append(23)
+print('温度的排序为：')
+print(sorted(m))
+
+
+
+1.显示4个商品然后打印分割线，只要第一页36个商品信息
+2.列出36个商品
+3.获取所有的商品价格并且给商品排序，从高到低排序
+4.按照销量排序
+5.商品过滤，只要15天退款或者包邮的商品信息，显示。
+import urllib.request as r
+data=r.urlopen('https://s.taobao.com/search?q=%E5%87%89%E9%9E%8B%E5%A5%B3&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20180718&ie=utf8&ajax=true').read().decode('utf-8','ignore')
+
+import json
+data=json.loads(data)
+
+def show():
+    for a in range(0,4):
+        print('第'+str(a+1)+'件商品的信息为:')
+        print(data['mods']['itemlist']['data']['auctions'][a]['title'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_fee'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_sales'])
+        
+show()
+print('#####################################################################')
+      
+      
+def show():
+    for a in range(0,36):
+        print('第'+str(a+1)+'件商品的信息为:')
+        print(data['mods']['itemlist']['data']['auctions'][a]['title'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_fee'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_sales'])
+        if (a+1)%4==0:
+            print('#'*20)
+show()
+
+ls=[]
+def price():
+    for a in range(0,36):
+        p=float(data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        ls.append(p)
+    return ls
+price()
+a=sorted(ls)
+print('商品价格从高到低排序为:')
+b=list(reversed(a))
+print(b)
+
+ls2=[]
+def sales():
+     for i in range(0,36):
+        x=data['mods']['itemlist']['data']['auctions'][i]['view_sales']
+        d=int(x[0:-3])
+        ls2.append(d)
+     return ls2 
+sales()
+e=sorted(ls2)
+print('商品销量从高到低排序为:')
+f=list(reversed(e))
+print(f)
+
+def baoyoufree():
+    for a in range(0,36):
+        y=a
+        if float(data['mods']['itemlist']['data']['auctions'][a]['view_fee'])==0.0:
+             print('第{}件商品包邮'.format(y+1))
+baoyoufree()
+
+练习七
+1、使用多选其一，完成天气的提醒，淘宝客户端
+2、一定要多次使用for循环，偶尔使用while循环，在淘宝客户端中
+3、使用到break或continue在淘宝客户端中
+import urllib.request as r
+data=r.urlopen('http://api.openweathermap.org/data/2.5/forecast?q=zhengzhou,cn&mode=json&lang=zh_cn&&APPID=6a67ed641c0fda8b69715c43518b6996&units=metric').read().decode('utf-8','ignore')
+
+import json
+data=json.loads(data)
+def cautions(a):
+    if a=='Clear':
+        print('请做好防晒工作')
+    elif a=='Cloud':
+        print('阴天出门，记得随身携带伞具')
+    elif a=='Rain':
+        print('雨天注意防滑，小心淋雨')
+def weather(a,b):
+    print('day'+str(a))
+    print('情况'+str(data['list'][b]['weather'][0]['main']))
+    cautions(str(data['list'][b]['weather'][0]['main']))
+weather(1,2)
+weather(2,10)
+weather(3,18)
+weather(4,26)
+weather(5,34)
+
+
+import urllib.request as r
+data=r.urlopen('https://s.taobao.com/search?q=%E5%87%89%E9%9E%8B%E5%A5%B3&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20180718&ie=utf8&ajax=true').read().decode('utf-8','ignore')
+
+import json
+data=json.loads(data)
+
+def show():
+    for a in range(0,36):
+        print('第'+str(a+1)+'件商品的信息为:')
+        print(data['mods']['itemlist']['data']['auctions'][a]['title'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_fee'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_sales'])
+        if (a+1)%4==0:
+            print('#'*20)
+show()
+
+ls=[]
+def price():
+    for a in range(0,36):
+        p=float(data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        ls.append(p)
+    return ls
+price()
+a=sorted(ls)
+print('商品价格从高到低排序为:')
+b=list(reversed(a))
+print(b)
+for i in b:
+    if i==279.0:
+        break
+    print(i)
+ls=[]
+def price():
+    for a in range(0,36):
+        p=float(data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        ls.append(p)
+    return ls
+price()
+a=sorted(ls)
+print('商品价格从高到低排序为:')
+b=list(reversed(a))
+print(b)
+for i in b:
+    if i==169.0:
+        continue
+    print(i)

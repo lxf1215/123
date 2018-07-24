@@ -1,0 +1,40 @@
+object YaSpark1{
+  def main(args: Array[String]) {
+    import org.json.JSONObject//导入str转json工具包
+    import org.apache.spark.SparkConf//
+    import org.apache.spark.SparkContext
+    //sparkcontext的配置，运行在本地，名称为cala
+    val conf = new SparkConf().setAppName("cala").setMaster("local")
+    val sc = new SparkContext(conf)//Spark运行环境,,本地电脑，集群
+    //使用spark读取文本文件
+    sc.textFile("C:\\天津文科招生人数.txt")
+      .filter(line=>line.endsWith("status\":1}"))
+      .flatMap(line=>{//line str===>List line 抚平
+      val json = new JSONObject(line)
+        val jsonlist = json.getJSONArray("data")
+        // jsonlist.getJSONObject(0)
+        val list = ListBuffer[JSONObject]()
+        for(i<-0 to jsonlist.length()-1){
+          list.append(jsonlist.getJSONObject(i))
+        }
+        list
+      })
+      .map(line=>(line.getString("school"),line.getString("plan").toInt))
+      .reduceByKey(_+_)
+      .foreach(line=>println(line))
+  }
+}
+
+f=open('D:/bigdata/123.txt').readlines()
+school=[]
+for line in f:
+    school.append(line.split(',')[0].split('(')[1])
+    f=open('招生学校.txt','a',encoding='utf-8')
+print(school)
+   
+f=open('D:/bigdata/123.txt').readlines()
+num=[]
+for line in f:
+    num.append(line.split(',')[1].split(')')[0])
+    f=open('招生学校.txt','a',encoding='utf-8')
+print(num)

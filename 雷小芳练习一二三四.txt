@@ -1,0 +1,214 @@
+wh=[18,21,31,24,23,20,26]
+print(wh[0])
+print(wh[1])
+print('周三'+str(wh[2]))
+print(wh[3])
+print(wh[4])
+print(wh[5])
+print(wh[6])
+
+wh={'mon':{'wh':'18℃','状态':'晴'},
+    'tue':{'wh':'21℃','状态':'阴'},
+    'wed':{'wh':'31℃','状态':'晴'},
+    'thu':{'wh':'24℃','状态':'阴'},
+    'fri':{'wh':'23℃','状态':'晴'}
+    }
+print(wh['wed'])
+
+#第一
+import urllib.request as r
+data=r.urlopen('http://api.openweathermap.org/data/2.5/forecast?q=zhengzhou,cn&mode=json&lang=zh_cn&&APPID=6a67ed641c0fda8b69715c43518b6996&units=metric').read().decode('utf-8','ignore')
+import json
+data=json.loads(data)
+print('第一天十八点的天气信息：')
+print('温度'+str(data['list'][2]['main']['temp']))
+print('情况'+str(data['list'][2]['weather'][0]['main']))
+print('气压'+str(data['list'][2]['main']['pressure']))
+print('最高温度'+str(data['list'][2]['main']['temp_max']))
+print('最低温度'+str(data['list'][2]['main']['temp_min']))
+print('第二天十八点的天气信息：')
+print('温度'+str(data['list'][10]['main']['temp']))
+print('情况'+str(data['list'][10]['weather'][0]['main']))
+print('气压'+str(data['list'][10]['main']['pressure']))
+print('最高温度'+str(data['list'][10]['main']['temp_max']))
+print('最低温度'+str(data['list'][10]['main']['temp_min']))
+print('第三天十八点的天气信息：')
+print('温度'+str(data['list'][18]['main']['temp']))
+print('情况'+str(data['list'][18]['weather'][0]['main']))
+print('气压'+str(data['list'][18]['main']['pressure']))
+print('最高温度'+str(data['list'][18]['main']['temp_max']))
+print('最低温度'+str(data['list'][18]['main']['temp_min']))
+print('第四天十八点的天气信息：')
+print('温度'+str(data['list'][26]['main']['temp']))
+print('情况'+str(data['list'][26]['weather'][0]['main']))
+print('气压'+str(data['list'][26]['main']['pressure']))
+print('最高温度'+str(data['list'][26]['main']['temp_max']))
+print('最低温度'+str(data['list'][26]['main']['temp_min']))
+print('第五天十八点的天气信息：')
+print('温度'+str(data['list'][34]['main']['temp']))
+print('情况'+str(data['list'][34]['weather'][0]['main']))
+print('气压'+str(data['list'][34]['main']['pressure']))
+print('最高温度'+str(data['list'][34]['main']['temp_max']))
+print('最低温度'+str(data['list'][34]['main']['temp_min']))
+
+
+#第二
+city=input('please input city')
+url='http://api.openweathermap.org/data/2.5/forecast?q=zhengzhou,cn&mode=json&lang=zh_cn&&APPID=6a67ed641c0fda8b69715c43518b6996&units=metric'
+data=r.urlopen(url).read().decode('utf-8','ignore')
+import json
+data=json.loads(data)
+print('第一天十八点的天气信息：')
+print('温度'+str(data['list'][2]['main']['temp']))
+print('情况'+str(data['list'][2]['weather'][0]['main']))
+print('气压'+str(data['list'][2]['main']['pressure']))
+print('最高温度'+str(data['list'][2]['main']['temp_max']))
+print('最低温度'+str(data['list'][2]['main']['temp_min']))
+print('第二天十八点的天气信息：')
+print('温度'+str(data['list'][10]['main']['temp']))
+print('情况'+str(data['list'][10]['weather'][0]['main']))
+print('气压'+str(data['list'][10]['main']['pressure']))
+print('最高温度'+str(data['list'][10]['main']['temp_max']))
+print('最低温度'+str(data['list'][10]['main']['temp_min']))
+print('第三天十八点的天气信息：')
+print('温度'+str(data['list'][18]['main']['temp']))
+print('情况'+str(data['list'][18]['weather'][0]['main']))
+print('气压'+str(data['list'][18]['main']['pressure']))
+print('最高温度'+str(data['list'][18]['main']['temp_max']))
+print('最低温度'+str(data['list'][18]['main']['temp_min']))
+print('第四天十八点的天气信息：')
+print('温度'+str(data['list'][26]['main']['temp']))
+print('情况'+str(data['list'][26]['weather'][0]['main']))
+print('气压'+str(data['list'][26]['main']['pressure']))
+print('最高温度'+str(data['list'][26]['main']['temp_max']))
+print('最低温度'+str(data['list'][26]['main']['temp_min']))
+print('第五天十八点的天气信息：')
+print('温度'+str(data['list'][34]['main']['temp']))
+print('情况'+str(data['list'][34]['weather'][0]['main']))
+print('气压'+str(data['list'][34]['main']['pressure']))
+print('最高温度'+str(data['list'][34]['main']['temp_max']))
+print('最低温度'+str(data['list'][34]['main']['temp_min']))
+
+#第三
+print('温度折线图：')
+print('第一天:'+'-'*int(data['list'][2]['main']['temp']))
+print('第二天:'+'-'*int(data['list'][10]['main']['temp']))
+print('第三天:'+'-'*int(data['list'][18]['main']['temp']))
+print('第四天:'+'-'*int(data['list'][26]['main']['temp']))
+print('第五天:'+'-'*int(data['list'][34]['main']['temp']))
+
+#第四
+temp=[data['list'][2]['main']['temp'] ,
+data['list'][10]['main']['temp'],
+data['list'][18]['main']['temp'],
+data['list'][26]['main']['temp'],
+data['list'][34]['main']['temp']
+]
+print('温度的排序为：')
+print(sorted(temp))
+
+#第五
+print('七月十八号上午九点的天气状况：')
+print('情况'+str(data['list'][2]['weather'][0]['description']))
+print('温馨提示：记得出门带伞，适宜随身薄外套，不宜室外运动')
+
+import urllib.request as r
+data=r.urlopen('http://api.openweathermap.org/data/2.5/forecast?q=zhengzhou,cn&mode=json&lang=zh_cn&&APPID=6a67ed641c0fda8b69715c43518b6996&units=metric').read().decode('utf-8','ignore')
+
+import json
+data=json.loads(data)
+def weather(a,b):
+    print('day'+str(a))
+    print('温度'+str(data['list'][b]['main']['temp']))
+    print('')
+weather(1,2)
+weather(2,10)
+weather(3,18)
+weather(4,26)
+weather(5,34)
+    
+def chart(a):
+    num=str('-')*int(data['list'][a]['main']['temp'])
+    return num
+print('温度折线图：')
+print('1'+chart(2))
+print('2'+chart(10))
+print('3'+chart(18))
+print('4'+chart(26))
+print('5'+chart(34))
+
+def lsc(d):
+    return data['list'][d]['main']['temp']
+d1=lsc(2)
+d2=lsc(10)
+d3=lsc(18)
+d4=lsc(26)
+d5=lsc(34)
+m=[d1,d2,d3,d4,d5]
+m.append(23)
+print('温度的排序为：')
+print(sorted(m))
+
+
+
+
+import urllib.request as r
+data=r.urlopen('https://s.taobao.com/search?q=%E5%87%89%E9%9E%8B%E5%A5%B3&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20180718&ie=utf8&ajax=true').read().decode('utf-8','ignore')
+
+import json
+data=json.loads(data)
+
+def show():
+    for a in range(0,4):
+        print('第'+str(a+1)+'件商品的信息为:')
+        print(data['mods']['itemlist']['data']['auctions'][a]['title'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_fee'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_sales'])
+        
+show()
+print('#####################################################################')
+      
+      
+def show():
+    for a in range(0,36):
+        print('第'+str(a+1)+'件商品的信息为:')
+        print(data['mods']['itemlist']['data']['auctions'][a]['title'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_fee'])
+        print(data['mods']['itemlist']['data']['auctions'][a]['view_sales'])
+        if (a+1)%4==0:
+            print('#'*20)
+show()
+
+ls=[]
+def price():
+    for a in range(0,36):
+        p=float(data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        ls.append(p)
+    return ls
+price()
+a=sorted(ls)
+print('商品价格从高到低排序为:')
+b=list(reversed(a))
+print(b)
+
+ls2=[]
+def sales():
+     for i in range(0,36):
+        x=data['mods']['itemlist']['data']['auctions'][i]['view_sales']
+        d=int(x[0:-3])
+        ls2.append(d)
+     return ls2 
+sales()
+e=sorted(ls2)
+print('商品销量从高到低排序为:')
+f=list(reversed(e))
+print(f)
+
+def baoyoufree():
+    for a in range(0,36):
+        y=a
+        if float(data['mods']['itemlist']['data']['auctions'][a]['view_fee'])==0.0:
+             print('第{}件商品包邮'.format(y+1))
+baoyoufree()
